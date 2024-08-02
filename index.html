@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Scalable Diffusion Transformer Policy for Visuomotor Learning">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scalable Diffusion Transformer Policy for Visuomotor Learning</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/logo.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">ScaleDP: Scalable Diffusion Transformer Policy for Visuomotor Learning</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a>Minjie Zhu</a><sup>1,2,*</sup>,</span>
+            <span class="author-block">
+              <a>Yichen Zhu</a><sup>1,*</sup>,</span>
+            <span class="author-block">
+              <a>Yanjie Ze</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a>Zhiyuan Xu</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a>Jinming Li</a><sup>1,4</sup>,
+            </span>
+            <span class="author-block">
+              <a>Junjie Wen</a><sup>1,2</sup>,
+            </span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a>Ning Liu</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a>Chaomin Shen</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a>Yaxin Peng</a><sup>4</sup>,
+            </span>
+            <span class="author-block">
+              <a>Feifei Feng</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a>Jian Tang</a><sup>1</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Midea Group,</span>
+            <span class="author-block"><sup>2</sup>East China Normal University,</span>
+            <span class="author-block"><sup>3</sup>Standford University,</span>
+            <span class="author-block"><sup>4</sup>Shanghai University</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>*</sup>Equal contribution</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="xx"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- arXiv Link. -->
+              <span class="link-block">
+                <a href="xx"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="xx"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- </span> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-bimanual_put_tennis_into_the_bag">
+          <video poster="" id="bimanual_put_tennis_into_the_bag" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/bimanual_put_tennis_into_the_bag/scaledp.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-bimanual_stack_cube">
+          <video poster="" id="bimanual_stack_cube" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/bimanual_stack_cube/scaledp.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-bimanual_sweep_trash">
+          <video poster="" id="bimanual_sweep_trash" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/bimanual_sweep_trash/scaledp.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-franka_put_tennis">
+          <video poster="" id="franka_put_tennis" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/franka_put_tennis/scaledp.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-franka_stack_cube">
+          <video poster="" id="franka_stack_cube" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/franka_stack_cube/scaledp.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-franka_flip_mug">
+          <video poster="" id="franka_flip_mug" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/franka_flip_mug/scaledp.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-franka_close_laptop">
+          <video poster="" id="franka_close_laptop" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/franka_close_laptop/scaledp.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          Diffusion Policy is a potent tool for learning visuomotor robot control. It is expected that Diffusion Policy possesses scalability, a key attribute for deep neural networks, 
+          typically suggesting that increasing model size would lead to enhanced performance. However, our observations indicate that Diffusion Policy in transformer architecture (DP-T) struggles to scale effectively; 
+          even minor additions of layers can deteriorate training outcomes. To address this issue, we introduce Scalable Diffusion Transformer Policy for visuomotor learning. 
+          Our proposed method, namely <b style="font-weight:900;">ScaleDP</b>, introduces two modules that improve the training dynamic of Diffusion Policy and allow the network to better handle multimodal action distribution. 
+          First, we identify that DP-T suffers from large gradient issues, making the optimization of Diffusion Policy unstable. To resolve this issue, we factorize the feature embedding of observation into multiple affine layers, 
+          and integrate it into the transformer blocks. Additionally, our unmasking strategy allows the policy network to "see" future actions during prediction, helping to reduce compounding errors. 
+          We demonstrate that our proposed method successfully scales the Diffusion Policy from 10 million to 1 billion parameters. 
+          This new model, named ScaleDP, can effectively scale up the model size with improved performance and generalization. 
+          We benchmark ScaleDP across 50 different tasks from MetaWorld and find that our largest ScaleDP outperforms DP-T with an average improvement of 21.6%. 
+          In four real robot tasks, ou rScaleDP demonstrated an average improvement of 22.5% over DP-T.
+          Through multiple simulations and real-world experiments, we validate the superior performance of ScaleDP compared to the traditional diffusion transformer policy. 
+          We believe our work paves the way for scaling up models for visuomotor learning.
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <!-- <h2 class="title is-3">Video</h2> -->
+        <div class="publication-video">
+          <video poster="" id="framework" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/paper_overview.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <!-- Model Architecture. -->
+        <h3 class="title is-4">Model Architecture</h3>
+        <div class="column has-text-centered">
+          <img src="./static/images/arch.jpg"
+                class="model-architecture"/>
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            To improve the training stability of DP-T and the consistency of each action embedding, our proposed ScaleDP model makes two key modifications to the original DP-T model.
+            <b style="font-weight:900;">(1)</b> Compared to fusing conditional information with cross-attention in DP-T, ScaleDP fuses the conditional information with adaptive normalization layers, which can stabilize the training process of the model.
+            <b style="font-weight:900;">(2)</b> ScaleDP uses an unmasking strategy that allows the policy network to "see" future actions during prediction, helping to reduce compounding errors.
+          </p>
+        </div>
+        <br/>
+        <!-- Model Architecture. -->
+
+        <!-- Experimental Results. -->
+        <h2 class="title is-3">Experiments</h2>
+        <div class="content has-text-justified">
+          <p>
+            We investigate whether ScaleDP can get better performance across a wide spectrum of robot manipulation tasks and environments. 
+            To this end, we evaluate the performance of ScaleDP on 7 real-world robot manipulation tasks, including 4 single arm tasks and 3 bimanual tasks.
+          </p>
+        </div>
+
+        <!-- Quantitative Comparison. -->
+        <h2 class="title is-4">Quantitative Comparison</h2>
+        <div class="content has-text-justified">
+          <!-- all. --> 
+          <table style="width:90%; margin:auto;">
+            <caption>Success rates on four single arm tasks and three bimanual tasks. It is worth noting that as the model size increases, the average success rate also increases correspondingly, demonstrating the scalability of our model architecture.
+              Each single arm task is evaluated with 20 trials, and each bimanual task is evaluated with 10 trials.</caption>
+            <thead>
+              <tr>
+                <th rowspan="2" style="vertical-align: middle;"><strong>Model</strong></th>
+                <th colspan="4" style="text-align: center;">Single Arm Tasks</th>
+                <th colspan="3" style="text-align: center;">Bimanual Tasks</th>
+                <th rowspan="2" style="vertical-align: middle;"><strong>Average</strong></th>
+              </tr>
+              <tr>
+                <th>Close Laptop</th>
+                <th>Flip Mug</th>
+                <th>Stack Cube</th>
+                <th>Place Tennis</th>
+                <th style="width: 120px;">Put Tennis into Bag</th>
+                <th>Sweep Trash</th>
+                <th style="width: 120px;">Bimanual Stack Cube</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>DP-T</td>
+                <td>80</td>
+                <td>70</td>
+                <td>50</td>
+                <td>5</td>
+                <td>20</td>
+                <td>50</td>
+                <td>0</td>
+                <td>39.28±29.08</td>
+              </tr>
+              <tr>
+                <td style="width: 100px;">ScaleDP-S</td>
+                <td>85</td>
+                <td>70</td>
+                <td>50</td>
+                <td>30</td>
+                <td><strong>100</strong></td>
+                <td>50</td>
+                <td>10</td>
+                <td>56.42±28.87</td>
+              </tr>
+              <tr>
+                <td>ScaleDP-B</td>
+                <td>80</td>
+                <td>65</td>
+                <td>50</td>
+                <td><strong>55</strong></td>
+                <td><strong>100</strong></td>
+                <td>60</td>
+                <td>10</td>
+                <td>60.00±25.77</td>
+              </tr>
+              <tr>
+                <td>ScaleDP-L</td>
+                <td><strong>95</strong></td>
+                <td><strong>80</strong></td>
+                <td><strong>70</strong></td>
+                <td>50</td>
+                <td><strong>100</strong></td>
+                <td><strong>80</strong></td>
+                <td><strong>90</strong></td>
+                <td><strong>80.71±15.68</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Quantitative Comparison. -->
+        
+        <br/>
+        <!-- Qualitative Comparison. -->
+        <h2 class="title is-4">Qualitative Comparison</h2>
+        <div class="content has-text-justified">
+          <p>
+            Qualitatively, we observe that ScaleDP works more smoothly and precisely compared to DP-T.
+          </p>
+        <div class="columns">
+          <div class="column has-text-centered">
+            <p style="font-size: 150%"><b>ScaleDP (Ours)</b></p>
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/bimanual_stack_cube/scaledp.mp4" type="video/mp4">
+              </video>
+          </div>
+          <div class="column has-text-centered">
+            <p style="font-size: 150%"><b>DP-T (Ours)</b></p>
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/bimanual_stack_cube/dp_t.mp4" type="video/mp4">
+              </video>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/bimanual_put_tennis_into_the_bag/scaledp.mp4" type="video/mp4">
+              </video>
+          </div>
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/bimanual_put_tennis_into_the_bag/dp_t.mp4" type="video/mp4">
+              </video>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/bimanual_sweep_trash/scaledp.mp4" type="video/mp4">
+              </video>
+          </div>
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/bimanual_sweep_trash/dp_t.mp4" type="video/mp4">
+              </video>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/franka_put_tennis/scaledp.mp4" type="video/mp4">
+              </video>
+          </div>
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/franka_put_tennis/dp_t.mp4" type="video/mp4">
+              </video>
+          </div>
+        </div>
+        <!--/ Experimental Results. -->
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{park2021nerfies,
+  title     = {Scalable Diffusion Transformer Policy for Visuomotor Learning},
+  author    = {Minjie Zhu},
+  booktitle = {Arxiv},
+  year      = {2024},
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content has-text-centered">
+          <p>
+            Website template borrowed from <a
+                                href="https://github.com/nerfies/nerfies.github.io">NeRFies</a>
+                                and <a href="https://eureka-research.github.io/">Eureka</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
